@@ -67,36 +67,42 @@ export default function App() {
     return (
         <main className="bg-gray-900 text-white w-full h-screen overflow-hidden relative">
             {user.backgroundBitmap && <canvas ref={canvas => {
-                if (!canvas || !user.backgroundBitmap) return
+                if (!canvas) return
                 const ctx = canvas.getContext("2d")!
-                canvas.width = window.innerWidth
-                canvas.height = window.innerHeight
+                function update() {
+                    if (!canvas || !user.backgroundBitmap) return
+                    canvas.width = window.innerWidth
+                    canvas.height = window.innerHeight
 
-                const img = user.backgroundBitmap
-                const canvasRatio = canvas.width / canvas.height
-                const imgRatio = img.width / img.height
-                let drawWidth = canvas.width
-                let drawHeight = canvas.height
-                let offsetX = 0
-                let offsetY = 0
-                if (imgRatio > canvasRatio) {
-                    drawHeight = canvas.height
-                    drawWidth = img.width * (canvas.height / img.height)
-                    offsetX = (canvas.width - drawWidth) / 2
-                } else {
-                    drawWidth = canvas.width
-                    drawHeight = img.height * (canvas.width / img.width)
-                    offsetY = (canvas.height - drawHeight) / 2
+                    const img = user.backgroundBitmap
+                    const canvasRatio = canvas.width / canvas.height
+                    const imgRatio = img.width / img.height
+                    let drawWidth = canvas.width
+                    let drawHeight = canvas.height
+                    let offsetX = 0
+                    let offsetY = 0
+                    if (imgRatio > canvasRatio) {
+                        drawHeight = canvas.height
+                        drawWidth = img.width * (canvas.height / img.height)
+                        offsetX = (canvas.width - drawWidth) / 2
+                    } else {
+                        drawWidth = canvas.width
+                        drawHeight = img.height * (canvas.width / img.width)
+                        offsetY = (canvas.height - drawHeight) / 2
+                    }
+
+                    ctx.clearRect(0, 0, canvas.width, canvas.height)
+                    ctx.drawImage(
+                        img,
+                        offsetX,
+                        offsetY,
+                        drawWidth,
+                        drawHeight
+                    )
                 }
 
-                ctx.clearRect(0, 0, canvas.width, canvas.height)
-                ctx.drawImage(
-                    img,
-                    offsetX,
-                    offsetY,
-                    drawWidth,
-                    drawHeight
-                )
+                update()
+                window.addEventListener("resize", update)
             }} />}
             <div id="center" className="flex flex-col px-5 w-[400px] md:w-[600px] top-1/2 left-1/2 -translate-1/2 absolute">
                 <input ref={welcomeMessageRef}
