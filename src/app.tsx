@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "preact/hooks"
 import useUser from "./lib/user"
 
+const URL_REGEX = /^(https?:\/\/[^\s]+|[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+)$/
+
 export default function App() {
     const user = useUser()
     const [query, setQuery] = useState("")
@@ -17,6 +19,13 @@ export default function App() {
         event.preventDefault()
         const q = query.trim()
         if (q === "") return
+        if (q.match(URL_REGEX)) {
+            let url = q
+            if (!url.startsWith("http")) url = `https://${url}`
+            window.location.href = url
+            return
+        }
+
         window.location.href = (user.getSearchEngine().url).replace(/\%s/g, encodeURIComponent(q))
     }
 
