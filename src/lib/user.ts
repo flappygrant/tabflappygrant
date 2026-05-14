@@ -18,6 +18,26 @@ const defaultSearchEngines: SearchEngine[] = [
         name: "Google",
         url: "https://google.com/search?q=%s",
     },
+    {
+        id: crypto.randomUUID(),
+        name: "DuckDuckGo",
+        url: "https://duckduckgo.com/search?q=%s",
+    },
+    {
+        id: crypto.randomUUID(),
+        name: "Ew... Bing",
+        url: "https://bing.com/search?q=%s",
+    },
+    {
+        id: crypto.randomUUID(),
+        name: "ChatGPT",
+        url: "https://chatgpt.com/?q=%s",
+    },
+    {
+        id: crypto.randomUUID(),
+        name: "GitHub",
+        url: "https://github.com/search?q=%s",
+    },
 ]
 
 const bitmapCache = new Map<string, ImageBitmap>()
