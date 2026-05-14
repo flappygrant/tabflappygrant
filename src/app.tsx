@@ -104,7 +104,7 @@ export default function App() {
                 update()
                 window.addEventListener("resize", update)
             }} />}
-            <div id="center" className="flex flex-col px-5 w-[400px] md:w-[600px] top-1/3 left-1/2 -translate-1/2 absolute">
+            <div id="center" className="flex flex-col px-5 w-[400px] md:w-[600px] top-1/2 md:top-1/3 left-1/2 -translate-1/2 absolute">
                 <input ref={welcomeMessageRef}
                     type="text"
                     value={user.welcomeMessage}
