@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "preact/hooks"
 import useUser from "./lib/user"
 
-const URL_REGEX = /^(https?:\/\/[^\s]+|[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+)$/
+const URL_REGEX = /^(https?:\/\/[^\s]+|(?:[a-zA-Z0-9-]+\.)+[a-zA-Z0-9-]+)$/
 
 export default function App() {
     const user = useUser()
